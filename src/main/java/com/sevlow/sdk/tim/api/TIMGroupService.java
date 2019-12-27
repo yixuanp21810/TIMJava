@@ -5,7 +5,6 @@ import com.sevlow.sdk.tim.bean.group.*;
 import com.sevlow.sdk.tim.common.error.TIMException;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Element
@@ -24,6 +23,12 @@ public interface TIMGroupService {
      * @throws TIMException
      */
     AllGroupResult getAllGroup(GroupInfo.Type type) throws TIMException;
+
+    
+    /**
+     *  获取群信息
+     */
+    List<GroupInfo> getGroupInfo(List<String> groupIds) throws TIMException ;
 
     /**
      * 分页获取群信息
@@ -169,6 +174,12 @@ public interface TIMGroupService {
      * @throws TIMException
      */
     AddGroupResult importGroupMember(String groupId, List<ImportMember> members) throws TIMException;
+
+    
+    /**
+     *  修改群成员资料
+     */
+    void modifyGroupMemberInfo(ModifyGroupMemberInfoReq req) throws TIMException;
 
 
 }

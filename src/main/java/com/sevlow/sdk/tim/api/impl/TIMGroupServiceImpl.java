@@ -7,6 +7,7 @@ import com.sevlow.sdk.tim.bean.chat.MsgCustomContent;
 import com.sevlow.sdk.tim.bean.group.*;
 import com.sevlow.sdk.tim.common.error.TIMException;
 import com.sevlow.sdk.tim.utils.JsonUtils;
+import lombok.NonNull;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -37,6 +38,25 @@ public class TIMGroupServiceImpl implements TIMGroupService {
             map.put("GroupType", type);
         }
         return this.getGroup(map);
+    }
+
+    /**
+     * 获取群信息
+     *
+     * @param groupIds
+     */
+    @Override
+    public List<GroupInfo> getGroupInfo(List<String> groupIds) throws TIMException {
+
+        String api = "v4/group_open_http_svc/get_group_info" ;
+
+        Map map = new HashMap(2);
+
+        map.put("GroupIdList",groupIds);
+
+        GroupInfoResult result = JsonUtils.fromJson(this.timService.post(api, map), GroupInfoResult.class);
+
+        return result.getGroupInfo();
     }
 
 
@@ -239,6 +259,15 @@ public class TIMGroupServiceImpl implements TIMGroupService {
         map.put("GroupId", groupId);
         map.put("MemberList", members);
         return JsonUtils.fromJson(this.timService.post(api, map), AddGroupResult.class);
+    }
+
+    /**
+     * 修改群成员资料
+     */
+    @Override
+    public void modifyGroupMemberInfo(@NonNull ModifyGroupMemberInfoReq req) throws TIMException {
+        String api = "v4/group_open_http_svc/modify_group_member_info";
+        this.timService.post(api, req);
     }
 
 

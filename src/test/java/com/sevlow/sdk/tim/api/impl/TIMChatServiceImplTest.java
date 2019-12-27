@@ -128,13 +128,14 @@ public class TIMChatServiceImplTest {
 
     @Test
     public void testSendCustomMsg2() throws TIMException {
-        String fromAccount = "74897564679274496" ;
-        String toAccount = "73071536809967616";
+        String fromAccount = "98471889676009472" ;
+        String toAccount = "104181068441059328";
 
         Map<String,String> data = new HashMap<>();
         data.put("type","2");
         data.put("money","10");
-        data.put("money","10");
+        data.put("text","文案text");
+        data.put("content","你好content");
         data.put("ext","www.qq.com");
         data.put("desc","hello");
 
@@ -143,7 +144,7 @@ public class TIMChatServiceImplTest {
         msg.setDesc("hello");
         msg.setExt("www.qq.com");
         msg.setSound("dingdong.aiff");
-        chatService.sendCustomMsg(fromAccount,toAccount,msg, ChatMsgEnum.NO_SYNC);
+        chatService.sendCustomMsg(fromAccount,toAccount,msg, ChatMsgEnum.SYNC);
     }
 
     @Test

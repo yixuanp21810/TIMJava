@@ -12,7 +12,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
-import org.testng.annotations.TestInstance;
 
 import javax.inject.Inject;
 import java.util.*;
@@ -52,6 +51,14 @@ public class TIMGroupServiceImplTest {
 
 
 	@Test
+	public void testGetGroupInfo() throws TIMException {
+		String groupId = "77719615328747520" ;
+		List<GroupInfo> list = groupService.getGroupInfo(Arrays.asList(groupId));
+		Assert.assertNotNull(list);
+	}
+
+
+	@Test
 	public void testCreateGroup() throws TIMException {
 		GroupInfo groupInfo = new GroupInfo();
 		groupInfo.setGroupId("119384433261281280");
@@ -66,27 +73,27 @@ public class TIMGroupServiceImplTest {
 	@Test
 	public void testUpdateGroup() throws TIMException {
 		GroupInfo groupInfo = new GroupInfo();
-		groupInfo.setGroupId("@TGS#3XWYJA6FQ");
-		groupInfo.setType(GroupInfo.Type.Public);
-		groupInfo.setApplyJoinOption(GroupInfo.ApplyJoinOption.FreeAccess);
-		groupInfo.setName("147");
-		System.out.println(groupInfo.toString());
+		groupInfo.setGroupId("124895374392426496");
+//		groupInfo.setType(GroupInfo.Type.Public);
+//		groupInfo.setApplyJoinOption(GroupInfo.ApplyJoinOption.FreeAccess);
+//		groupInfo.setName("huahua");
+		groupInfo.setShutUpAllMember(GroupInfo.ShutUpAllMember.On);
 		groupService.updateGroup(groupInfo);
 	}
 
 
 	@Test
 	public void testJoinGroup() throws TIMException {
-		List<String> list = Arrays.asList("69887072709640192","74897564679274496");
-		AddGroupResult addGroupResult = groupService.addGroupMember("119384433261281280",list, SilenceEnum.QUIET);
+		List<String> list = Arrays.asList("105269240084299776","74897564679274496");
+		AddGroupResult addGroupResult = groupService.addGroupMember("122718508491472896",list, SilenceEnum.QUIET);
 		System.out.println("11111");
 	}
 
 
 	@Test
 	public void testDeleteGroupMember() throws TIMException {
-		List<String> list = Arrays.asList("74897564679274496","74897564679274496");
-		groupService.deleteGroupMember("11231",list, SilenceEnum.QUIET,null);
+		List<String> list = Arrays.asList("105269240084299776");
+		groupService.deleteGroupMember("122718508491472896",list, SilenceEnum.QUIET,"你好你好");
 
 	}
 
@@ -94,11 +101,11 @@ public class TIMGroupServiceImplTest {
 	@Test
 	public void testModifyGroupMemberInfo() throws TIMException {
 		GroupMemberInfo info = new GroupMemberInfo();
-		info.setGroupId("@TGS#3XWYJA6FQ");
-		info.setMemberAccount("74940051523371008");
-		info.setRole(GroupMemberInfo.Role.Admin);
-		info.setNameCard("你好");
-		info.setMsgFlag(GroupMemberInfo.MsgFlag.AcceptNotNotify);
+		info.setGroupId("122666654936072192");
+		info.setMemberAccount("105269240084299776");
+		//info.setRole(GroupMemberInfo.Role.Admin);
+		info.setNameCard("你好666");
+		info.setMsgFlag(GroupMemberInfo.MsgFlag.Discard);
 		groupService.modifyGroupMemberInfo(info);
 
 	}
@@ -106,7 +113,7 @@ public class TIMGroupServiceImplTest {
 
 	@Test
 	public void testDestroyGroup() throws TIMException {
-		groupService.destroyGroup("@TGS#3XWYJA6FQ");
+		groupService.destroyGroup("124118461335994368");
 	}
 
 	@Test
@@ -124,20 +131,20 @@ public class TIMGroupServiceImplTest {
 
 	@Test
 	public void testSendGroupMsg() throws TIMException {
-		groupService.sendGroupMsg("119384433261281280",null,true,"你好11");
+		groupService.sendGroupMsg("124835802260701184","124826573399392256",true,"你好11");
 	}
 
 
 	@Test
 	public void testSendGroupSystemNotification() throws TIMException {
-		groupService.sendGroupSystemNotification("119384433261281280",null,"你好111");
+		groupService.sendGroupSystemNotification("124281248687325184",null,"你好111");
 	}
 
 	@Test
 	public void testSentGroupCustomMsg() throws TIMException {
 		Map map = new HashMap();
 		map.put("action","9");
-		map.put("type","8");
+		map.put("type","10");
 		map.put("name","你好");
 
 		MsgCustomContent msg = new MsgCustomContent();
@@ -146,7 +153,7 @@ public class TIMGroupServiceImplTest {
 		msg.setDesc("您有一条系统消息");
 
 		msg.setData(JsonUtils.toJson(map));
-		groupService.sentGroupCustomMsg("119384433261281280",null,null,msg);
+		groupService.sentGroupCustomMsg("124905622138257408","98471889676009472",null,msg);
 	}
 
 
@@ -163,4 +170,6 @@ public class TIMGroupServiceImplTest {
 		AddGroupResult result = groupService.importGroupMember("117954688241893376", members);
 		Assert.assertNotNull(result);
 	}
+
+
 }

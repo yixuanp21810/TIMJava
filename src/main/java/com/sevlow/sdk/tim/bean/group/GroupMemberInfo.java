@@ -54,13 +54,31 @@ public class GroupMemberInfo implements Serializable {
 
 
     public enum MsgFlag{
+        /**
+         *  代表接收并提示消息
+         */
         AcceptAndNotify,
+
+        /**
+         *  代表不接收也不提示消息
+         */
         Discard,
+
+        /**
+         *  代表接收消息但不提示
+         */
         AcceptNotNotify
     }
 
     public enum Role{
+        /**
+         *  管理员
+         */
         Admin,
+
+        /**
+         *  普通成员
+         */
         Member
     }
 }
