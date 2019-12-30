@@ -202,7 +202,7 @@ public class TIMGroupServiceImpl implements TIMGroupService {
      * @param groupId
      * @param account
      * @param isSentOnline true 则消息表示只在线下发，不存离线和漫游（AVChatRoom 和 BChatRoom 不允许使用）。
-     * @param map          自定义消息内容
+     * @param message      自定义消息内容
      */
     @Override
     public void sentGroupCustomMsg(String groupId, String account, Boolean isSentOnline, MsgCustomContent message) throws TIMException {
@@ -225,7 +225,7 @@ public class TIMGroupServiceImpl implements TIMGroupService {
         msgBody.setMsgType("TIMCustomElem");
         msgBody.setMsgContent(message);
         msgBodies.add(msgBody);
-        body.put("MsgBody",msgBodies);
+        body.put("MsgBody", msgBodies);
 
         this.timService.post(api, body);
     }
@@ -249,9 +249,6 @@ public class TIMGroupServiceImpl implements TIMGroupService {
         this.sendGroupSystemNotification(groupId, null, message);
     }
 
-    /**
-     * 导入群成员
-     */
     @Override
     public AddGroupResult importGroupMember(String groupId, List<ImportMember> members) throws TIMException {
         String api = "v4/group_open_http_svc/import_group_member";
