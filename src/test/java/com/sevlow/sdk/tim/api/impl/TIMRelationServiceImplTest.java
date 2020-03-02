@@ -51,7 +51,7 @@ public class TIMRelationServiceImplTest {
 
 	@Test
 	public void testImportFried() throws TIMException {
-		ImportFriendsResult result = relationService.importFriends("test_1", Arrays.asList("test_2", "test_3", "test_4"), "forTest");
+		ImportFriendsResult result = relationService.importFriends("17612021831", Arrays.asList("72396511861800960", "test_3", "test_4"), "forTest");
 		Assert.assertEquals(result.getResultItems().size(), 3);
 	}
 
@@ -82,7 +82,7 @@ public class TIMRelationServiceImplTest {
 	@Test
 	public void testDeleteFriends() throws TIMException {
 
-		DeleteFriendsResult result = relationService.deleteFriend("test_1", Arrays.asList("test_2", "test_3"));
+		DeleteFriendsResult result = relationService.deleteFriend("17612021831", Arrays.asList("72396511861800960"));
 
 		Assert.assertEquals(result.getResultItems().size(), 2);
 
@@ -100,8 +100,8 @@ public class TIMRelationServiceImplTest {
 
 	@Test
 	public void testCheckFriends() throws TIMException {
-		String identifier = "74516245050818560";
-		List list = Arrays.asList("74518861914832896");
+		String identifier = "17612021831";
+		List list = Arrays.asList("72396511861800960");
 		CheckFriendsResult result = relationService.checkFriends(identifier, list);
 		Assert.assertEquals(2, result.getInfoItems().size());
 
@@ -110,7 +110,7 @@ public class TIMRelationServiceImplTest {
 	@Test
 	public void testListFriends() throws TIMException{
 
-		String account = "10001";
+		String account = "17612021831";
 		Integer startIndex = 0;
 
 		ListFriendsResult result = relationService.listFriends(account,startIndex);
@@ -119,20 +119,20 @@ public class TIMRelationServiceImplTest {
 
 	@Test
 	public void testListFriendsDirectivity() throws TIMException{
-		String account = "119020659249512448";
-		List<String> friends = Lists.newArrayList("119029328846520320","119097887090016256","118283730413420544");
+		String account = "69887072709640192";
+		List<String> friends = Lists.newArrayList("111626559579750400");
 		List<String> profiles = Lists.newArrayList(TIMProfile.TAG_PROFILE_IM_NICK,TIMProfile.TAG_PROFILE_IM_GENDER);
 		List<String> customProfiles = Lists.newArrayList("college");
 		List<String> snsProfiles = Lists.newArrayList(TIMFriendProfile.TAG_SNS_IM_REMARK);
 		ListFriendsDirectivityResult result = relationService.listFriendsDirectivity(account,friends,profiles,customProfiles,snsProfiles,null);
-
+		System.out.println("...........");
 	}
 
 
 	@Test
 	public void testAddBlockAccounts() throws TIMException {
-		String identifier = "test_1";
-		List account = Arrays.asList("test_2");
+		String identifier = "17612021831";
+		List account = Arrays.asList("130706239884623872");
 		AddBlockAccountsResult result = relationService.addBlockAccounts(identifier, account);
 		Assert.assertEquals(result.getResultItems().size(), 1);
 
@@ -142,8 +142,8 @@ public class TIMRelationServiceImplTest {
 	@Test
 	public void testRemoveblockAccounts() throws TIMException {
 
-		String identifier = "test_1";
-		List account = Arrays.asList("test_2");
+		String identifier = "149478431061442560";
+		List account = Arrays.asList("17612021831");
 		RemoveBlockAccountsResult result = relationService.removeblockAccounts(identifier, account);
 		Assert.assertEquals(result.getResultItems().size(), 1);
 
@@ -151,10 +151,10 @@ public class TIMRelationServiceImplTest {
 
 	@Test
 	public void testListBlockAccounts() throws TIMException {
-
-		String identifier = "test_1";
+		String identifier = "127426853462867968"; // 向日葵 7
+		//String identifier = "149478431061442560";  // 匿名 4
 		Integer offset = 0;
-		Integer rows = 1;
+		Integer rows = 200;
 		Integer lastSequence = 0;
 		ListBlockAccountsResult res = relationService.listBlockAccounts(identifier, offset, rows, lastSequence);
 		Assert.assertTrue(res.getCurruentSequence() > 0);
@@ -162,9 +162,8 @@ public class TIMRelationServiceImplTest {
 
 	@Test
 	public void testCheckBlockAccounts() throws TIMException {
-
 		String identifier = "test_1";
-		List<String> accounts = Arrays.asList("test_2", "test_3");
+		List<String> accounts = Arrays.asList("test_2");
 		CheckBlockAccountsResult result = relationService.checkBlockAccounts(identifier, accounts, TIMRelationService.BlackCheckType.BlackCheckResult_Type_Both);
 		Assert.assertTrue(result.getBlackListCheckItems().size() > 0);
 	}
@@ -183,7 +182,6 @@ public class TIMRelationServiceImplTest {
 		List<String> groupNames = Arrays.asList("group123");
 		DeleteGroupsResult res = relationService.deleteGroups(identifier, groupNames);
 		Assert.assertTrue(res.getCurrentSequence() >= 0);
-
 	}
 
 	@Test

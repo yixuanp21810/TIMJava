@@ -24,7 +24,7 @@ public class ShuttedMemberResult implements Serializable {
 
 
     @Data
-    private class ShuttedUin{
+    public class ShuttedUin{
 
         @SerializedName("Member_Account")
         private String memberAccount ;

@@ -52,10 +52,10 @@ public class TIMGroupServiceImplTest {
     @Test
     public void testCreateGroup() throws TIMException {
         GroupInfo groupInfo = new GroupInfo();
-        groupInfo.setGroupId("119384433261281280");
+        groupInfo.setGroupId("124196474618642432");
         groupInfo.setType(GroupInfo.Type.Public);
         groupInfo.setApplyJoinOption(GroupInfo.ApplyJoinOption.FreeAccess);
-        groupInfo.setName("147");
+        groupInfo.setName("群主的群");
         log.debug(groupInfo.toString());
         CreateGroupResult group = groupService.createGroup(groupInfo);
         Assert.assertNotNull(group);
@@ -64,10 +64,11 @@ public class TIMGroupServiceImplTest {
     @Test
     public void testUpdateGroup() throws TIMException {
         GroupInfo groupInfo = new GroupInfo();
-        groupInfo.setGroupId("@TGS#3XWYJA6FQ");
+        groupInfo.setGroupId("124196474618642432");
         groupInfo.setType(GroupInfo.Type.Public);
         groupInfo.setApplyJoinOption(GroupInfo.ApplyJoinOption.FreeAccess);
-        groupInfo.setName("147");
+        groupInfo.setShutUpAllMember(GroupInfo.ShutUpAllMember.On);
+        groupInfo.setName("群主的群1");
         log.debug(groupInfo.toString());
         groupService.updateGroup(groupInfo);
     }
@@ -116,6 +117,7 @@ public class TIMGroupServiceImplTest {
     @Test
     public void testGetShuttedMember() throws TIMException {
         ShuttedMemberResult member = groupService.getShuttedMember("11231");
+        List<ShuttedMemberResult.ShuttedUin> shuttedUinList = member.getShuttedUinList();
         Assert.assertNotNull(member);
     }
 
