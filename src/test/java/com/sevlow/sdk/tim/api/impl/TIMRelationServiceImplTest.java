@@ -142,8 +142,8 @@ public class TIMRelationServiceImplTest {
 	@Test
 	public void testRemoveblockAccounts() throws TIMException {
 
-		String identifier = "149478431061442560";
-		List account = Arrays.asList("17612021831");
+		String identifier = "104181068441059328";
+		List account = Arrays.asList("98471889676009472");
 		RemoveBlockAccountsResult result = relationService.removeblockAccounts(identifier, account);
 		Assert.assertEquals(result.getResultItems().size(), 1);
 

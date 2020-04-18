@@ -12,6 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Guice;
 import org.testng.annotations.Test;
+import org.testng.collections.Maps;
 
 import javax.inject.Inject;
 import java.util.*;
@@ -84,8 +85,8 @@ public class TIMGroupServiceImplTest {
 
     @Test
     public void testDeleteGroupMember() throws TIMException {
-        List<String> list = Arrays.asList("74897564679274496", "74897564679274496");
-        groupService.deleteGroupMember("11231", list, SilenceEnum.QUIET, null);
+        List<String> list = Arrays.asList("107521143283384320");
+        groupService.deleteGroupMember("10007", list, SilenceEnum.QUIET, null);
 
     }
 
@@ -163,4 +164,14 @@ public class TIMGroupServiceImplTest {
         AddGroupResult result = groupService.importGroupMember("117954688241893376", members);
         Assert.assertNotNull(result);
     }
+
+    @Test
+    public void testSetGroupPortrait() throws TIMException {
+        Map map = Maps.newHashMap();
+        map.put("type","1");
+        groupService.setGroupPortrait("124196474618642432",map);
+
+    }
+
+
 }

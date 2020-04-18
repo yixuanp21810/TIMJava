@@ -44,9 +44,9 @@ public class TIMChatServiceImplTest {
     @Test
     public void testBatchSendMsg() throws TIMException {
 
-        String fromAccount = "admin" ;
+        String fromAccount = "10004" ;
 
-        List toAccount = Arrays.asList("test_211","test_3","sssddasdfewrfew");
+        List toAccount = Arrays.asList("162970674862755840");
 
         List<String> msg = Arrays.asList("你好");
 

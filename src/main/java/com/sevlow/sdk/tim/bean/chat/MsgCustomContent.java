@@ -21,17 +21,17 @@ public class MsgCustomContent {
      *  自定义消息描述信息；当接收方为 iOS 或 Android 后台在线时，做离线推送文本展示。
      */
     @SerializedName("Desc")
-    private String desc ;
+    private String desc = "您有一条系统消息";
 
     /**
      *  扩展字段；当接收方为 iOS 系统且应用处在后台时，此字段作为 APNs 请求包 Payloads 中的 ext 键值下发
      */
     @SerializedName("Ext")
-    private String ext ;
+    private String ext = "您有一条系统消息";
 
     /**
      *  自定义 APNs 推送铃音。
      */
     @SerializedName("Sound")
-    private String sound ;
+    private String sound = "dingdong.aiff" ;
 }

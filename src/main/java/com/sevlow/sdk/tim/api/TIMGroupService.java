@@ -5,6 +5,7 @@ import com.sevlow.sdk.tim.bean.group.*;
 import com.sevlow.sdk.tim.common.error.TIMException;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Element
@@ -57,6 +58,12 @@ public interface TIMGroupService {
      * @throws TIMException
      */
     void updateGroup(GroupInfo groupInfo) throws TIMException;
+
+
+    /**
+     *  修改群主自定义资料
+     */
+    void setGroupPortrait(String groupId, Map<String,Object> customProfile) throws TIMException;
 
 
     /**

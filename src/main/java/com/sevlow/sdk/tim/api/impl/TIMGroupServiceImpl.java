@@ -2,9 +2,11 @@ package com.sevlow.sdk.tim.api.impl;
 
 import com.sevlow.sdk.tim.api.TIMGroupService;
 import com.sevlow.sdk.tim.api.TIMService;
+import com.sevlow.sdk.tim.bean.SnsItem;
 import com.sevlow.sdk.tim.bean.chat.MsgBody;
 import com.sevlow.sdk.tim.bean.chat.MsgCustomContent;
 import com.sevlow.sdk.tim.bean.group.*;
+import com.sevlow.sdk.tim.common.error.TIMError;
 import com.sevlow.sdk.tim.common.error.TIMException;
 import com.sevlow.sdk.tim.utils.JsonUtils;
 import lombok.NonNull;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 public class TIMGroupServiceImpl implements TIMGroupService {
 
     private TIMService timService;
+
 
     public TIMGroupServiceImpl(TIMService timService) {
         this.timService = timService;
@@ -91,6 +94,28 @@ public class TIMGroupServiceImpl implements TIMGroupService {
         String api = "v4/group_open_http_svc/modify_group_base_info";
 
         this.timService.post(api, groupInfo);
+    }
+
+    /**
+     * 修改群主自定义资料
+     */
+    @Override
+    public void setGroupPortrait(@NonNull String groupId, @NonNull Map<String,Object> customProfile) throws TIMException {
+        String api = "v4/group_open_http_svc/modify_group_base_info";
+
+        List<SnsItem> profileItemList = new ArrayList<>();
+
+        String key;
+        for (Map.Entry<String, Object> entity : customProfile.entrySet()) {
+            key = entity.getKey();
+            profileItemList.add(new SnsItem(key, entity.getValue()));
+        }
+
+        Map<String, Object> body = new HashMap<>(2);
+        body.put("GroupId", groupId);
+        body.put("AppDefinedData", profileItemList);
+
+        this.timService.post(api, body);
     }
 
     @Override
